@@ -1,6 +1,5 @@
 from dbm.ndbm import library
 
-
 class Library:
     
     def __init__(self, booksList, name):
@@ -14,14 +13,17 @@ class Library:
             print(book)
 
     def addBook(self, book):
-        if book in self.booksList:
+        if book in booksList:
             print('Book already exists.')
         else:
             self.booksList.append(book)
+            bookDatabase = open(databaseName, 'a')
+            bookDatabase.write('/n')
+            bookDatabase.write(book)
             print('Book added.')
 
     def lendBook(self, book, user):
-        if book in self.booksList:
+        if book in booksList:
             if book not in self.lendDict.keys():
                 self.lendDict.update({book: user})
                 print('Book has been lended. Database updated.')
@@ -37,6 +39,9 @@ class Library:
         else:
             print('The book does not exist in the book lending database.')
 
+    def deleteBook(self, book):
+        pass
+
 def main():
     while True:
         
@@ -51,24 +56,32 @@ def main():
         print(choice)
 
         userInput = input('Press C to continue or Q to quit. ').lower()
+        
         if userInput == 'c':
             userChoice = int(input('Select an option to continue:'))
+            
             if userChoice == 1:
                 library.displayBooks()
+            
             elif userChoice == 2:
                 book = input('Enter the name of the book you want to lend:')
                 user = input('Enter the name of the user:')
                 library.lendBook(book, user)
+            
             elif userChoice == 3:
                 book = input('Enter the name of the book you want to add:')
                 library.addBook(book)
+            
             elif userChoice == 4:
                 book = input('Enter the name of the book you want to return:')
                 library.returnBook(book)
+            
             else:
                 print('Please choose a valid option: 1 to display books, 2 to lend a book, 3 to add a book, 4 to return a book. ')
+        
         elif userInput == 'q':
             break
+        
         else:
             print('Please choose a valid option: C to continue or Q to quit.')
 
@@ -76,7 +89,10 @@ if __name__ == '__main__':
     booksList = []
     databaseName = input('Enter the name of the database file with extension: ')
     bookDatabase = open(databaseName, 'r')
+    
     for book in bookDatabase:
         booksList.append(book)
+    
     library = Library(booksList, 'Matilda')
+    
     main()
