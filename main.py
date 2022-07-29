@@ -40,9 +40,10 @@ class Library:
 def main():
     while True:
         
-        print(f'Welcome to {library.name} library. Following are the options, ')
+        print(f'Welcome to {library.name} Library. Following are the options, ')
         
-        choice = '''1. Display books
+        choice = '''
+        1. Display books
         2. Lend a book
         3. Add a book
         4. Return a book'''
@@ -77,5 +78,5 @@ if __name__ == '__main__':
     bookDatabase = open(databaseName, 'r')
     for book in bookDatabase:
         booksList.append(book)
-    library = Library(booksList, 'PythonX')
+    library = Library(booksList, 'Matilda')
     main()
