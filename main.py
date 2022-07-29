@@ -1,3 +1,6 @@
+from dbm.ndbm import library
+
+
 class Library:
     
     def __init__(self, booksList, name):
@@ -34,8 +37,6 @@ class Library:
         else:
             print('The book does not exist in the book lending database.')
 
-library = Library(booksList=[],name='Judy')
-
 def main():
     while True:
         
@@ -70,4 +71,11 @@ def main():
         else:
             print('Please choose a valid option: C to continue or Q to quit.')
 
-main()
+if __name__ == '__main__':
+    booksList = []
+    databaseName = input('Enter the name of the database file with extension: ')
+    bookDatabase = open(databaseName, 'r')
+    for book in bookDatabase:
+        booksList.append(book)
+    library = Library(booksList, 'PythonX')
+    main()
