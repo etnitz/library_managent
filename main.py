@@ -27,5 +27,31 @@ class Library:
         else:
             print("Apologies, We currently do not have this book in our library")
 
-    def returnBook():
-        pass
+    def returnBook(self, book):
+        if book in self.lendDict.keys():
+            self.lendDict.pop(book)
+            print('Book returned successfully')
+        else:
+            print('The book does not exist in the book lending database')
+
+library = Library()
+
+def main():
+    while True:
+        
+        print(f'Welcome to {library.name} library. Following are the options,')
+        
+        choice = '''1. Display books
+        2. Lend a book
+        3. Add a book
+        4. Return a book'''
+        
+        print(choice)
+
+        userInput = input('Press Q to quit or C to continue').lower()
+        if userInput == 'c':
+            userChoice = int(input('Select an option to continue:'))
+            if userChoice == 1:
+                library.displayBooks()
+            elif userChoice == 2:
+                
