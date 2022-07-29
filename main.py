@@ -6,7 +6,9 @@ class Library:
         self.lendDict = {}
 
     def displayBooks():
-        pass
+        print(f'We have the following books in our library: {self.name}')
+        for book in self.booklist:
+            print(book)
 
     def addBook():
         pass
